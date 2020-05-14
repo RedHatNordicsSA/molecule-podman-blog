@@ -1,0 +1,11 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    ansible_python_interpreter: /usr/libexec/platform-python
+    #ansible_become: yes
+    ansible_ssh_pipelining: no
+  tasks:
+    - name: "Include ftp"
+      include_role:
+        name: "ftp"

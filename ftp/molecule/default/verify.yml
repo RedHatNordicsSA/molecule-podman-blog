@@ -1,0 +1,37 @@
+---
+
+- name: Verify
+  hosts: all
+  tasks:
+
+    - name: check if vsftpd is installed
+      package:
+        name: vsftpd
+        state: present
+      check_mode: yes
+      register: pkg
+
+    - name: fail if package was not installed
+      assert:
+        that:
+          - pkg.changed is false
+        fail_msg: "Package vsftpd was not installed!"
+        success_msg: "Package vsftpd was installed."
+
+    - name: check service is stopped
+      service:
+        name: vsftpd
+        enabled: false
+        state: stopped
+      check_mode: yes
+      register: svc
+
+    - name: fail if service was activated
+      assert:
+        that:
+          - svc.changed is false
+        success_msg: "Service vsftpd was disabled."
+        fail_msg: "Service vsftpd was activated!"
+
+    - name: test result
+      debug: msg="FTP daemon was installed and disabled. Test OK"

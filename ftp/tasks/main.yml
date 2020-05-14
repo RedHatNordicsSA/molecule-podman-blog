@@ -1,0 +1,12 @@
+---
+
+- name: make sure ftp server is installed
+  package:
+    name: vsftpd
+    state: present
+
+- name: make sure ftp server is disabled
+  service:
+    name: vsftpd
+    state: stopped
+    enabled: false
