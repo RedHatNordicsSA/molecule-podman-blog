@@ -23,12 +23,14 @@ None
 Example Playbook
 ----------------
 
+```
 - name: basic initialization playbook for host
   hosts: all
   tasks:
 
     - include_role:
         name: ftp
+```
 
 License
 -------
